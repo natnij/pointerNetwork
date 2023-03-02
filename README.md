@@ -106,23 +106,23 @@ $K_x, K_y$ are input and output sets, $T_x, T_y$ are length of the input and out
 
 Decoder:
 
-hidden state $s_i = (1 - z_i) \circ s_{i-1} + z_i \circ \tilde{s}_i$，where
+hidden state $s_i = (1 - z_i) \circ s_{i-1} + z_i \circ \tilde{s}_i$
 
-proposal state $\tilde{s}_i = tanh \big( W_p y_{i-1} + U_p [r_i \circ s_{i-1}] + C_p c_i \big)$
+proposal state $\tilde s_i = \tanh \big(W_p y_{i-1} + U_p (r_i \circ s_{i-1}) + C_p c_i \big)$
 
 update state $z_i = \sigma \big( W_z y_{i-1} + U_z s_{i-1} + C_z c_i \big)$
 
-reset state $z_i = \sigma \big( W_r y_{i-1} + U_r s_{i-1} + C_r c_i \big)$
+reset state $r_i = \sigma \big( W_r y_{i-1} + U_r s_{i-1} + C_r c_i \big)$
 
-context vector $c_i = \sum_{j=1}^{T_x} \alpha_{ij} h_j$
+context vector $c_i = \sum\limits_{j=1}^{T_x} \alpha_{ij} h_j$
 
-probability vector $\alpha_{ij} = \cfrac{exp(e_{ij})}{\sum_{k=1}^{T_x} exp(e_{ik})}$
+probability vector $\alpha_{ij} = \cfrac{\exp(e_{ij})}{\sum\limits_{k=1}^{T_x} \exp(e_{ik})}$
 
-alignment vector $e_{ij} = v_a^T tanh \big( W_a s_{i-1} + U_a h_j \big)$
+alignment vector $e_{ij} = v_a^T \tanh \big( W_a s_{i-1} + U_a h_j \big)$
 
 where $h_j$ is encoder hidden state output.
 
-Trainable variables are $W, U, C$ 和 $v_a^T$.
+Trainable variables are $W, U, C$ and $v_a^T$.
 
 ### Pointer network：
 
